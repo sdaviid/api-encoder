@@ -11,10 +11,6 @@ exports.list = function(req, res) {
     res.json({status: 200, page: 'list /', from: 'controller'})
 };
 
-exports.gen_token = function(req, res){
-  const id = '0001';
-  return res.json({status: 200, token: jwt.sign({ id: '0002', name: 'kkkk' }, config.secret, { expiresIn: 300 })});
-}
 
 exports.add = async function(req, res){
   console.log(req.body)
