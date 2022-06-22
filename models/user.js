@@ -19,7 +19,13 @@ const User = database.define('user', {
   name: {
     type: Sequelize.STRING,
     allowNull: false
-  }
-})
+  },
+  status: {
+    type: Sequelize.ENUM("1", "0"),
+    defaultValue: "0"
+  },
+},{
+  modelName: "User"
+});
 
 module.exports = User;

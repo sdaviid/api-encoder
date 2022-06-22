@@ -25,10 +25,22 @@ exports.authenticated = function(req, res, next){
               }
             );
     }
+    console.log(decoded.status);
+    if(decoded.status == '0'){
+      return res
+              .status(403)
+              .json(
+                {
+                  status: 403,
+                  message: 'Inactive user'
+                }
+              )
+    }
     req.userData = {
       id: decoded.id,
       username: decoded.username,
       name: decoded.name,
+      status: decoded.status,
       createdAt: decoded.createdAt,
       updatedAt: decoded.updatedAt
     }

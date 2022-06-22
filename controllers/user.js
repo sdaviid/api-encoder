@@ -60,6 +60,7 @@ exports.authenticate = async function(req, res){
                                 id: resultUser.id,
                                 username: resultUser.username,
                                 name: resultUser.name,
+                                status: resultUser.status,
                                 createdAt: resultUser.createdAt,
                                 updatedAt: resultUser.updatedAt
                               },
@@ -108,6 +109,7 @@ exports.me = function(req, res){
             id: req.userData.id,
             username: req.userData.username,
             name: req.userData.name,
+            status: req.userData.status,
             createdAt: req.userData.createdAt,
             updatedAt: req.userData.updatedAt
           }
