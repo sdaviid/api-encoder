@@ -28,7 +28,9 @@ exports.authenticated = function(req, res, next){
     req.userData = {
       id: decoded.id,
       username: decoded.username,
-      name: decoded.name
+      name: decoded.name,
+      createdAt: decoded.createdAt,
+      updatedAt: decoded.updatedAt
     }
     next();
   });

@@ -96,3 +96,21 @@ exports.authenticate = async function(req, res){
       );
   }
 }
+
+
+exports.me = function(req, res){
+  res.status(200)
+      .json(
+        {
+          status: 200,
+          message: null,
+          data: {
+            id: req.userData.id,
+            username: req.userData.username,
+            name: req.userData.name,
+            createdAt: req.userData.createdAt,
+            updatedAt: req.userData.updatedAt
+          }
+        }
+      );
+}
