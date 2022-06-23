@@ -50,7 +50,6 @@ exports.list = async function(req, res){
     if(resultFiles.length>0){
       let filesList = [];
       resultFiles.forEach(function(item){
-        console.log('porra gay');
         item.dataValues['serve'] = `${path.join(config.OUTPUT_SERVE, item.name)}.mp4`;
         console.log(item);
         filesList.push(item);
