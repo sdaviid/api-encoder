@@ -3,12 +3,12 @@ const config = require('../config.json');
 const UserModel = require('../models/user');
 
 exports.index = function(req, res) {
-    res.json({status: 200, page: 'index /', from: 'controller'})
+  res.json({status: 200, page: 'index /', from: 'controller'})
 };
 
 
 exports.list = function(req, res) {
-    res.json({status: 200, page: 'list /', from: 'controller'})
+  res.json({status: 200, page: 'list /', from: 'controller'})
 };
 
 

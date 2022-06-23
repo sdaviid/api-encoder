@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
 const database = require('../utils/db');
+
+
  
 const User = database.define('user', {
   id: {
@@ -27,5 +29,8 @@ const User = database.define('user', {
 },{
   modelName: "User"
 });
+
+//const File = require('./file')
+//User.hasMany(File, {as: "file"});
 
 module.exports = User;
