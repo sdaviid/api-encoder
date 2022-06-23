@@ -1,4 +1,6 @@
 {
 	"secret": "123456",
-	"database_schema": "sqlite://teste.db"
+	"database_schema": "sqlite://teste.db",
+	"FOLDER_DOWNLOAD": "/var/www/html/dump/mkv",
+	"FOLDER_ENCODE": "/var/www/html/dump/mp4"
 }

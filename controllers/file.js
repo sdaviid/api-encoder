@@ -1,3 +1,4 @@
+const utils = require('../utils/utils');
 const FileModel = require('../models/file');
 const UserModel = require('../models/user');
 
@@ -7,34 +8,24 @@ exports.index = function(req, res){
 
 exports.create = async function(req, res){
   const origin = req.body.origin;
+  const name = utils.md5String(origin.substr(origin.lastIndexOf('/')+1));
   try{
-    const resultUser = await UserModel.findOne({where: {id: req.userData.id}});
-    if(resultUser){
-      const resultCreateFile = await FileModel.create({userId: req.userData.id, origin: origin, status: '0'});
-      if(resultCreateFile){
-        res.status(200)
-            .json(
-              {
-                status: 200,
-                message: null,
-                data: resultCreateFile
-              }
-            )
-      }else{
-        res.status(400)
-            .json(
-              {
-                status: 400,
-                message: 'failed add file'
-              }
-            )
-      }
+    const resultCreateFile = await FileModel.create({userId: req.userData.id, origin: origin, name: name, status: 'PENDING_DOWNLOAD'});
+    if(resultCreateFile){
+      res.status(200)
+          .json(
+            {
+              status: 200,
+              message: null,
+              data: resultCreateFile
+            }
+          )
     }else{
       res.status(400)
           .json(
             {
               status: 400,
-              message: 'could load user data'
+              message: 'failed add file'
             }
           )
     }

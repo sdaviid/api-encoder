@@ -23,6 +23,9 @@ app.listen(3000, () => {
 
 
 var handbrake = require('./workers/handbrake');
+var axel = require('./workers/axel');
 
-setInterval( function() { console.log('rodou handbrake run'); handbrake() }, 5000 );
+
+setInterval( function() { console.log('rodou axel run'); axel() }, 10000 );
+setInterval( function() { console.log('rodou handbrake run'); handbrake() }, 15000 );
 
