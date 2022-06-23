@@ -1,6 +1,7 @@
 {
 	"secret": "123456",
 	"database_schema": "sqlite://teste.db",
+	"default_port": 3000,
 	"FOLDER_DOWNLOAD": "/var/www/html/dump/mkv",
 	"FOLDER_ENCODE": "/var/www/html/dump/mp4"
 }

@@ -18,7 +18,7 @@ app.use('/api', routes);
 
 
 app.listen(3000, () => {
-  console.log('Servidor de exemplo aberto na porta: 3000')
+  console.log(`running on: http://0.0.0.0:${config.default_port}`);
 })
 
 
@@ -26,6 +26,6 @@ var handbrake = require('./workers/handbrake');
 var axel = require('./workers/axel');
 
 
-setInterval( function() { console.log('rodou axel run'); axel() }, 10000 );
-setInterval( function() { console.log('rodou handbrake run'); handbrake() }, 15000 );
+setInterval( function() { axel() }, 5000 );
+setInterval( function() { handbrake() }, 5000 );
 

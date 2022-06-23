@@ -21,9 +21,11 @@ function handbrake_run(){
           var path_source = `${path.join(config.FOLDER_DOWNLOAD, item.name)}.mkv`;
           var path_output = `${path.join(config.FOLDER_ENCODE, item.name)}.mp4`;
           var origin = item.origin;
+          console.log(`[HANDBRAKE] initiating encoding - ${path_source} - ${id_doing}`);
           run_script("HandBrakeCLI", ["-i", path_source, "-o", path_output], function(output, exit_code) {
             FileModel.update({status: 'DONE'}, {where: {id: item.id}}).then(function(fileNewStatus){
               running = false;
+              console.log(`[HANDBRAKE] finish encoding - ${path_source} - ${id_doing}`);
             });
           });
         }
@@ -32,9 +34,7 @@ function handbrake_run(){
       if(id_doing != false){
         let temp = last_message.substring(last_message.indexOf(',')+1).trim();
         temp = temp.substring(0, temp.indexOf('%')).trim();
-        FileModel.update({progress: temp}, {where: {id: id_doing}}).then(function(fileProgressUpdate){
-          console.log(fileProgressUpdate);
-        })
+        FileModel.update({progress: temp}, {where: {id: id_doing}})
       }
     }
   });

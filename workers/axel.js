@@ -20,9 +20,11 @@ function axel_run(){
           id_doing = item.id;
           var source = item.origin;
           var path_output = `${path.join(config.FOLDER_DOWNLOAD, item.name)}.mkv`;
+          console.log(`[AXEL] initiating transfer - ${source} - ${id_doing}`);
           run_script("axel", [source, "-o", path_output], function(output, exit_code){
             FileModel.update({status: 'PENDING_ENCODE'}, {where: {id: item.id}}).then(function(fileNewStatus){
               running = false;
+              console.log(`[AXEL] finish transfer - ${source} - ${id_doing}`);
             });
           })
         }
@@ -31,9 +33,7 @@ function axel_run(){
       if(id_doing != false){
         let temp = last_message.substring(last_message.indexOf('[ ')+2).trim();
         temp = temp.substring(0, temp.indexOf('%')).trim();
-        FileModel.update({progress: temp}, {where: {id: id_doing}}).then(function(fileProgressUpdate){
-          console.log(fileProgressUpdate);
-        });
+        FileModel.update({progress: temp}, {where: {id: id_doing}});
       }
     }
   });
