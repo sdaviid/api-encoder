@@ -17,7 +17,7 @@ const routes = require('./routes/index');
 app.use('/api', routes);
 
 
-app.listen(3000, () => {
+app.listen(config.default_port, () => {
   console.log(`running on: http://0.0.0.0:${config.default_port}`);
 })
 
