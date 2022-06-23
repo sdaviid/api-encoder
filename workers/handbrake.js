@@ -1,6 +1,6 @@
 var child_process = require('child_process');
 
-const FileModel = require('./models/file');
+const FileModel = require('../models/file');
 
 var running = false;
 var id_doing = false;
@@ -27,8 +27,8 @@ function handbrake_run(){
       if(id_doing != false){
         let temp = last_message.substring(last_message.indexOf(',')+1).trim();
         temp = temp.substring(0, temp.indexOf('%')).trim();
-        FileModel.update({percentage: temp}, {where: {id: id_doing}}).then(function(filePercentageUpdate){
-          console.log(filePercentageUpdate);
+        FileModel.update({progress: temp}, {where: {id: id_doing}}).then(function(fileProgressUpdate){
+          console.log(fileProgressUpdate);
         })
       }
     }

@@ -10,7 +10,7 @@ exports.create = async function(req, res){
   try{
     const resultUser = await UserModel.findOne({where: {id: req.userData.id}});
     if(resultUser){
-      const resultCreateFile = await FileModel.create({userId: 1, origin: origin, status: '0'});
+      const resultCreateFile = await FileModel.create({userId: req.userData.id, origin: origin, status: '0'});
       if(resultCreateFile){
         res.status(200)
             .json(
