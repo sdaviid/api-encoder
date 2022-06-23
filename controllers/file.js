@@ -44,6 +44,47 @@ exports.create = async function(req, res){
   }
 }
 
+exports.findName = async function(req, res){
+  const name = req.query.name;
+  try{
+    const resultFindName = await FileModel.findOne(
+      {
+        where: {
+          name: name
+        }
+      }
+    );
+    if(resultFindName){
+      resultFindName.dataValues['serve'] = `${path.join(config.OUTPUT_SERVE, resultFindName.name)}.mp4`
+      res.status(200)
+          .json(
+            {
+              status: 200,
+              message: null,
+              data: resultFindName 
+            }
+          );
+    }else{
+      res.status(404)
+          .json(
+            {
+              status: 404,
+              message: 'item not found'
+            }
+          );
+    }
+  }catch(err){
+    res.status(500)
+        .json(
+          {
+            status: 500,
+            message: 'Exception retrive name file',
+            detail: err
+          }
+        );
+  }
+}
+
 exports.list = async function(req, res){
   try{
     const resultFiles = await FileModel.findAll({where: {userId: req.userData.id}});
