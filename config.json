@@ -1,7 +1,8 @@
 {
 	"secret": "123456",
 	"database_schema": "sqlite://teste.db",
-	"default_port": 3000,
+	"default_port": 55001,
 	"FOLDER_DOWNLOAD": "/media/dd/1Tbb/videos/mkv",
-	"FOLDER_ENCODE": "/media/dd/1Tbb/videos/mp4"
+	"FOLDER_ENCODE": "/media/dd/1Tbb/videos/mp4",
+	"OUTPUT_SERVE": "http://127.0.0.1/videos/mp4"
 }

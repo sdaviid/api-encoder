@@ -2,6 +2,9 @@ const utils = require('../utils/utils');
 const FileModel = require('../models/file');
 const UserModel = require('../models/user');
 
+const config = require('../config.json');
+const path = require('path');
+
 exports.index = function(req, res){
   res.json({status: 200, page: 'index files', from: 'controller file'});
 }
@@ -45,12 +48,19 @@ exports.list = async function(req, res){
   try{
     const resultFiles = await FileModel.findAll({where: {userId: req.userData.id}});
     if(resultFiles.length>0){
+      let filesList = [];
+      resultFiles.forEach(function(item){
+        console.log('porra gay');
+        item.dataValues['serve'] = `${path.join(config.OUTPUT_SERVE, item.name)}.mp4`;
+        console.log(item);
+        filesList.push(item);
+      });
       res.status(200)
           .json(
             {
               status: 200,
               message: null,
-              data: resultFiles
+              data: filesList
             }
           )
     }else{
