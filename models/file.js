@@ -17,6 +17,9 @@ const File = database.define('file', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  percentage: {
+    type: Sequelize.STRING
+  },
   status: {
     type: Sequelize.ENUM("4", "3", "2", "1", "0"),
     defaultValue: "0"

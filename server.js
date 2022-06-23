@@ -20,3 +20,9 @@ app.use('/api', routes);
 app.listen(3000, () => {
   console.log('Servidor de exemplo aberto na porta: 3000')
 })
+
+
+var handbrake = require('./workers/handbrake');
+
+setInterval( function() { console.log('rodou handbrake run'); handbrake() }, 5000 );
+
