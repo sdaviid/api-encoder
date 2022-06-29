@@ -15,6 +15,7 @@ exports.authenticated = function(req, res, next){
         );
   }
   jwt.verify(token, config.secret, function(err, decoded){
+    console.log(decoded);
     if(err){
       return res
             .status(500)
@@ -25,14 +26,14 @@ exports.authenticated = function(req, res, next){
               }
             );
     }
-    console.log(decoded.status);
-    if(decoded.status == '0'){
+    console.log(decoded.aud)
+    if(decoded.aud != 'cli-web-encoder'){
       return res
               .status(403)
               .json(
                 {
                   status: 403,
-                  message: 'Inactive user'
+                  message: 'Not allowed'
                 }
               )
     }
