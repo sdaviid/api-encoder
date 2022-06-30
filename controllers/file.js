@@ -87,12 +87,11 @@ exports.findName = async function(req, res){
 
 exports.list = async function(req, res){
   try{
-    const resultFiles = await FileModel.findAll({where: {userId: req.userData.id}});
+    const resultFiles = await FileModel.findAll();//{where: {userId: req.userData.id}});
     if(resultFiles.length>0){
       let filesList = [];
       resultFiles.forEach(function(item){
         item.dataValues['serve'] = `${path.join(config.OUTPUT_SERVE, item.name)}.mp4`;
-        console.log(item);
         filesList.push(item);
       });
       res.status(200)
