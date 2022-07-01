@@ -5,9 +5,6 @@ const FileModel = require('../models/file');
 const config = require('../config.json');
 const path = require('path');
 
-exports.index = function(req, res){
-  res.json({status: 200, page: 'index files', from: 'controller file'});
-}
 
 exports.create = async function(req, res){
   const origin = req.body.origin;
@@ -130,7 +127,7 @@ exports.line = async function(req, res){
 exports.list = async function(req, res){
   try{
     console.log(req.userData);
-    const resultFiles = await FileModel.findAll({where: {userId: req.userData.id}});
+    const resultFiles = await FileModel.findAll();
     if(resultFiles.length>0){
       let filesList = [];
       resultFiles.forEach(function(item){
