@@ -1,3 +1,4 @@
+const Sequelize = require('sequelize');
 const utils = require('../utils/utils');
 const FileModel = require('../models/file');
 
@@ -84,11 +85,52 @@ exports.findName = async function(req, res){
   }
 }
 
+exports.line = async function(req, res){
+  try{
+    const resultFiles = await FileModel.findAll(
+                                            {where: Sequelize.or(
+                                              {status: 'PENDING_DOWNLOAD'},
+                                              {status: 'PENDING_ENCODE'}
+                                            )}
+    );
+    if(resultFiles.length>0){
+      let download = 0;
+      let encode = 0;
+      resultFiles.forEach(function(item){
+        if(item.status == 'PENDING_DOWNLOAD')
+          download += 1;
+        if(item.status == 'PENDING_ENCODE')
+          encode += 1; 
+      });
+      res.status(200)
+          .json(
+            {
+              status: 200,
+              message: null,
+              pending_download: download,
+              pending_encode: encode
+            }
+          );
+    }else{
+      res.status(204).json()
+    }
+  }catch(err){
+    res.status(500)
+        .json(
+          {
+            status: 500,
+            message: 'Exception retrive list file',
+            detail: err
+          }
+        )
+  }
+}
+
+
 exports.list = async function(req, res){
   try{
     console.log(req.userData);
     const resultFiles = await FileModel.findAll({where: {userId: req.userData.id}});
-    console.log(resultFiles);
     if(resultFiles.length>0){
       let filesList = [];
       resultFiles.forEach(function(item){

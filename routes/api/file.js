@@ -8,9 +8,9 @@ var file_controller = require('../../controllers/file');
 
 
 
-router.get('/', authCheck.authenticated, file_controller.index);
-router.post('/create', authCheck.authenticated, file_controller.create);
+router.post('/create', authCheck.authenticated, authCheck.validateRoles(['admin', 'server']), file_controller.create);
 router.get('/list', authCheck.authenticated, authCheck.validateRoles(['admin', 'server', 'user']), file_controller.list);
-router.get('/see', authCheck.authenticated, file_controller.findName);
+router.get('/see', authCheck.authenticated, authCheck.authenticated, authCheck.validateRoles(['admin', 'server']), file_controller.findName);
+router.get('/line', authCheck.authenticated, authCheck.authenticated, authCheck.validateRoles(['admin', 'server']), file_controller.line);
 
 module.exports = router;
