@@ -8,6 +8,7 @@ exports.validateRoles = (roles) => {
       let go = false;
       roles.forEach(function(item, index){
         if(decoded.role.includes(item)){
+          console.log('go');
           go = true;
         }
       });
@@ -62,12 +63,7 @@ exports.authenticated = function(req, res, next){
               )
     }
     req.userData = {
-      id: decoded.id,
-      username: decoded.username,
-      name: decoded.name,
-      status: decoded.status,
-      createdAt: decoded.createdAt,
-      updatedAt: decoded.updatedAt
+      id: decoded.sub
     }
     next();
   });

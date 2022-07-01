@@ -1,6 +1,5 @@
 const utils = require('../utils/utils');
 const FileModel = require('../models/file');
-const UserModel = require('../models/user');
 
 const config = require('../config.json');
 const path = require('path');
@@ -87,7 +86,9 @@ exports.findName = async function(req, res){
 
 exports.list = async function(req, res){
   try{
-    const resultFiles = await FileModel.findAll();//{where: {userId: req.userData.id}});
+    console.log(req.userData);
+    const resultFiles = await FileModel.findAll({where: {userId: req.userData.id}});
+    console.log(resultFiles);
     if(resultFiles.length>0){
       let filesList = [];
       resultFiles.forEach(function(item){
@@ -103,7 +104,8 @@ exports.list = async function(req, res){
             }
           )
     }else{
-      res.status(204)
+      console.log('204');
+      res.status(204).json();
     }
   }catch(err){
     res.status(500)

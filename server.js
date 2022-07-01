@@ -5,7 +5,6 @@ const config = require('./config.json');
 const app = express()
 
 const database = require('./utils/db');
-const User = require('./models/user');
 const File = require('./models/file')
 
 app.use(bodyParser.json());

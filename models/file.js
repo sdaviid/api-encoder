@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const database = require('../utils/db');
-const User = require('./user');
 
 const File = database.define('file', {
   id: {
@@ -10,7 +9,7 @@ const File = database.define('file', {
     primaryKey: true
   },
   userId: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   origin: {
@@ -32,9 +31,6 @@ const File = database.define('file', {
   modelName: "File"
 });
 
-File.belongsTo(User, {
-  foreignKey: 'userId',
-  as: 'id_user'
-})
+
 
 module.exports = File
