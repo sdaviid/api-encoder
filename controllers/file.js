@@ -90,15 +90,16 @@ exports.line = async function(req, res){
                                               {status: 'PENDING_ENCODE'}
                                             )}
     );
+    let download = 0;
+    let encode = 0;
     if(resultFiles.length>0){
-      let download = 0;
-      let encode = 0;
       resultFiles.forEach(function(item){
         if(item.status == 'PENDING_DOWNLOAD')
           download += 1;
         if(item.status == 'PENDING_ENCODE')
           encode += 1; 
       });
+    }
       res.status(200)
           .json(
             {
@@ -108,9 +109,6 @@ exports.line = async function(req, res){
               pending_encode: encode
             }
           );
-    }else{
-      res.status(204).json()
-    }
   }catch(err){
     res.status(500)
         .json(
