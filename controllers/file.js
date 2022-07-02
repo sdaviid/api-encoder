@@ -113,8 +113,8 @@ exports.line = async function(req, res){
             {
               status: 200,
               message: null,
-              pending_download: download,
-              pending_encode: encode,
+              pending_download: pending_download,
+              pending_encode: pending_encode,
               downloading: downloading,
               encoding: encoding
             }
