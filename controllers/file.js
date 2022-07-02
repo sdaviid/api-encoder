@@ -87,17 +87,25 @@ exports.line = async function(req, res){
     const resultFiles = await FileModel.findAll(
                                             {where: Sequelize.or(
                                               {status: 'PENDING_DOWNLOAD'},
-                                              {status: 'PENDING_ENCODE'}
+                                              {status: 'PENDING_ENCODE'},
+                                              {status: 'DOWNLOADING'},
+                                              {status: 'ENCODING'}
                                             )}
     );
-    let download = 0;
-    let encode = 0;
+    let pending_download = 0;
+    let pending_encode = 0;
+    let downloading = 0;
+    let encoding = 0;
     if(resultFiles.length>0){
       resultFiles.forEach(function(item){
         if(item.status == 'PENDING_DOWNLOAD')
-          download += 1;
+          pending_download += 1;
         if(item.status == 'PENDING_ENCODE')
-          encode += 1; 
+          pending_encode += 1;
+        if(item.status == 'DOWNLOADING')
+          downloading += 1;
+        if(item.status == 'ENCODING')
+          encoding += 1;
       });
     }
       res.status(200)
@@ -106,7 +114,9 @@ exports.line = async function(req, res){
               status: 200,
               message: null,
               pending_download: download,
-              pending_encode: encode
+              pending_encode: encode,
+              downloading: downloading,
+              encoding: encoding
             }
           );
   }catch(err){
