@@ -24,7 +24,7 @@ const File = database.define('file', {
     type: Sequelize.STRING
   },
   status: {
-    type: Sequelize.ENUM("PENDING_DOWNLOAD", "DOWNLOADING", "PENDING_ENCODE", "ENCODING", "DONE"),
+    type: Sequelize.ENUM("PENDING_DOWNLOAD", "DOWNLOADING", "PENDING_ENCODE", "ENCODING", "DONE", "DELETED"),
     defaultValue: "PENDING_DOWNLOAD"
   }
 },{
