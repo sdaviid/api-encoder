@@ -22,7 +22,7 @@ function handbrake_run(){
           var path_output = `${path.join(config.FOLDER_ENCODE, item.name)}.mp4`;
           var origin = item.origin;
           console.log(`[HANDBRAKE] initiating encoding - ${path_source} - ${id_doing}`);
-          run_script("HandBrakeCLI", ["-i", path_source, "-o", path_output], function(output, exit_code) {
+          run_script("HandBrakeCLI", ["-i", path_source, "-o", path_output, '-O'], function(output, exit_code) {
             FileModel.update({status: 'DONE'}, {where: {id: item.id}}).then(function(fileNewStatus){
               running = false;
               console.log(`[HANDBRAKE] finish encoding - ${path_source} - ${id_doing}`);
